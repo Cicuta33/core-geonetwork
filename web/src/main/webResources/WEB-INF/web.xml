@@ -337,4 +337,46 @@
         <!-- 3 hours -->
         <session-timeout>180</session-timeout>
     </session-config>
+    
+    <!-- ECAS security -->
+	<!-- Here we specify which URLs are protected by ECAS and which application server role is used.-->
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>geoNetwork</web-resource-name>
+	        <description>Require users to authenticate to access geoNetwork</description>
+	        <url-pattern>/srv/*</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	        <description>ensures that the principal is authenticated</description>
+	    	<role-name>*</role-name>
+	    </auth-constraint>
+	    <user-data-constraint>
+	        <description>Encryption is not required for the application in general.</description>
+	        <transport-guarantee>NONE</transport-guarantee>
+	    </user-data-constraint>
+	</security-constraint>
+	<!-- Here we specify the ECAS login action URL (called after successful ECAS login) and the ECAS error action URL.-->
+
+    <login-config>
+        <auth-method>ECAS</auth-method>
+        <realm-name>geoNetwork Realm</realm-name>
+    </login-config>
+
+	<security-role>
+	    <description>Syntetic role that indicates if the principal is authenticated</description>
+	    <role-name>authenticated</role-name>
+	</security-role>
+	
+	  <!-- role: ecasTestRole -->
+    <security-role>
+        <description>Application-defined role</description>
+        <role-name>INTERNET</role-name>
+    </security-role>
+
+    <!-- role: EUROPEAN_COMMISSION -->
+    <security-role>
+        <description>Application-defined role</description>
+        <role-name>EUROPEAN_COMMISSION</role-name>
+    </security-role>
+
 </web-app>
