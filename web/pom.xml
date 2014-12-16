@@ -419,11 +419,30 @@
 		<artifactId>flying-saucer-pdf-itext5</artifactId>
 		<version>9.0.1</version>
 	</dependency>
+	
+	<!-- ECAS -->
 	<dependency>
        <groupId>eu.europa.ec.digit</groupId>
        <artifactId>refapp-support-security-ecas-file</artifactId>
        <version>1.2.0-SNAPSHOT</version>
 	</dependency>
+	
+	<dependency>
+       <groupId>eu.europa.ec.digit</groupId>
+       <artifactId>ecas-tomcat</artifactId>
+       <version>7.0-3.11.1</version>
+       <scope>provided</scope>
+	</dependency>
+		
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-catalina</artifactId>
+		<version>7.0.57</version>
+		<scope>provided</scope>
+	</dependency>
+
+	
+	<!-- /ECAS -->
 	
 	</dependencies>
 

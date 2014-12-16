@@ -344,11 +344,11 @@
 	    <web-resource-collection>
 	        <web-resource-name>geoNetwork</web-resource-name>
 	        <description>Require users to authenticate to access geoNetwork</description>
-	        <url-pattern>/srv/*</url-pattern>
+	        <url-pattern>/*</url-pattern>
 	    </web-resource-collection>
 	    <auth-constraint>
 	        <description>ensures that the principal is authenticated</description>
-	    	<role-name>*</role-name>
+	    	<role-name>authenticated</role-name>
 	    </auth-constraint>
 	    <user-data-constraint>
 	        <description>Encryption is not required for the application in general.</description>
