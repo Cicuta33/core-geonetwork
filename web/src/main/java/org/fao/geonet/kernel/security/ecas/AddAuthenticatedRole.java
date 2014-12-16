@@ -9,13 +9,13 @@ import java.util.List;
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.ProfileManager;
 import jeeves.server.resources.ResourceManager;
+import jeeves.utils.Log;
 import jeeves.utils.SerialFactory;
 
 import org.fao.geonet.constants.Geonet;
 import org.jdom.Element;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.web.context.ContextLoader;
 
 import eu.cec.digit.ecas.client.validation.DetailedAuthenticationSuccess;
@@ -60,6 +60,16 @@ public class AddAuthenticatedRole
 						arg0.getEmail(), arg0.getOrgId(), "ECAS");
 			}
 
+			// Extract roles, groups and profiles
+			Element dbUserProfilRequest = dbms
+					.select("SELECT profile FROM Users WHERE username=?",
+							arg0.getUid());
+			if (dbUserProfilRequest.getChild("record") != null) {
+				String dbUserProfil = dbUserProfilRequest.getChild("record")
+						.getChildText("profile");
+				list.add(dbUserProfil);
+			}
+
 		} catch (Exception e) {
 			throw new ExtraGroupHandlingException(
 					"Could not connect to local database", e);
@@ -72,8 +82,6 @@ public class AddAuthenticatedRole
 						"Could not connect to local database", e);
 			}
 		}
-
-		// TODO connect to LDAP
 
 		return list;
 	}
